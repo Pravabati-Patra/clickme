@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For Arun 💖</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #ffe4e9;
+      text-align: center;
+      font-family: 'Comic Neue', cursive;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-family: 'Pacifico', cursive;
+      font-size: 32px;
+      padding: 0 10px;
+    }
+
+    #sticker {
+      width: 150px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 70px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      padding: 10px;
+      touch-action: manipulation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #yes {
+      background-color: #28a745;
+      width: 220px;
+      height: 90px;
+      font-size: 20px;
+    }
+
+    #no {
+      background-color: #dc3545;
+      width: 220px;
+      height: 90px;
+      font-size: 20px;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Aren't you a little too cute to be a CA? ❤️</h1>
+
+<img id="sticker" src="https://i.imgur.com/gionwsg.gif">
+
+<div class="buttons">
+  <button id="yes" class="btn">YES 💚</button>
+  <button id="no" class="btn">NO ❤️</button>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script>
+let noCount = 0;
+let isBusy = false;
+
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const sticker = document.getElementById("sticker");
+
+let yesSize = 220;
+let noSize = 220;
+
+/* 🔥 preload GIFs */
+[
+"https://i.imgur.com/gionwsg.gif",
+"https://media1.giphy.com/media/BhRNXjTlP0IdQp25cd/giphy.gif",
+"https://i.imgur.com/ZqEUjc5.jpeg",
+"https://i.imgur.com/uBncDPy.gif",
+"https://i.imgur.com/6XFqQOU.gif",
+"https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif",
+"https://i.imgur.com/L6hHuhK.jpeg",
+"https://i.imgur.com/DvuHwkC.gif",
+"https://media.tenor.com/tOhnd3nQiisAAAAi/tkthao219-quby.gif"
+].forEach(src => { let img = new Image(); img.src = src; });
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("click", () => {
+  if (isBusy) return;
+  isBusy = true;
+  setTimeout(() => isBusy = false, 250);
+
+  noCount++;
+
+  yesSize += 15;
+  noSize -= 10;
+  noSize = Math.max(noSize, 60);
+
+  yesBtn.style.width = yesSize + "px";
+  yesBtn.style.height = (yesSize * 0.4) + "px";
+
+  noBtn.style.width = noSize + "px";
+  noBtn.style.height = (noSize * 0.4) + "px";
+
+  switch(noCount) {
+    case 1:
+      noBtn.innerText = "You said NO? 😕";
+      sticker.src = "https://media1.giphy.com/media/BhRNXjTlP0IdQp25cd/giphy.gif";
+      break;
+
+    case 2:
+      noBtn.innerText = "Look at you 😳";
+      sticker.src = "https://i.imgur.com/ZqEUjc5.jpeg";
+      break;
+
+    case 3:
+      noBtn.innerText = "illegal level of cuteness 🫨";
+      sticker.src = "https://i.imgur.com/uBncDPy.gif";
+      break;
+
+    case 4:
+      noBtn.innerText = "Controller outside, Cutie inside😤";
+      sticker.src = "https://i.imgur.com/6XFqQOU.gif";
+      break;
+
+    case 5:
+      noBtn.innerText = "Stop it 😭";
+      sticker.src = "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif";
+      break;
+
+    case 6:
+      noBtn.innerText = "Doesn't suit your Role👀";
+      sticker.src = "https://i.imgur.com/L6hHuhK.jpeg";
+      break;
+
+    case 7:
+      noBtn.innerText = "Audit Failed😏";
+      sticker.src = "https://i.imgur.com/DvuHwkC.gif";
+      break;
+
+    case 8:
+      noBtn.innerText = "Hmm..Try Again!!";
+      sticker.src = "https://media.tenor.com/tOhnd3nQiisAAAAi/tkthao219-quby.gif";
+      noBtn.addEventListener("mouseover", moveButton);
+      noBtn.addEventListener("click", moveButton);
+      break;
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <style>
+      body {
+        background: #ffe4e9;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        overflow: hidden;
+      }
+
+      h1 {
+        margin-top: 100px;
+        font-size: 34px;
+        color: #ff4d88;
+        animation: glow 1.5s infinite alternate;
+      }
+
+      h2 {
+        font-size: 20px;
+        color: #ff66a3;
+      }
+
+      @keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh); /* full screen height */
+    opacity: 0;
+  }
+}
+
+      .heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 4s linear forwards;
+  z-index: 999; /* IMPORTANT: keeps hearts above everything */
+}
+
+      canvas {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1;
+}
+    </style>
+
+    <h4>Aruniii, Congratulations! on your Promotion!!</h4>
+    <h4>A cutie AND now a Finance Controller 💼😍</h4>
+    <h4>Still not sure how they take you seriously</h4>
+    <h2>But I'm SO proud of you 💖 </h2>
+	<h2>💰Paisa De💰</h2>
+
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3c3bWNqdHMyNW9iODgzb28wbWY5Mnh4NG9oMW43N3Jzd29oN2VvZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GWcgfING8NavRHAIaj/giphy.gif" width="220">
+    
+	<canvas id="confetti"></canvas>
+  `;
+
+  startConfetti();
+  createHearts();
+});
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }, 200);
+}
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let pieces = Array.from({length:200}, () => ({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    dy: Math.random()*5+2,
+    size: Math.random()*5+2
+  }));
+
+  function update() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.fillRect(p.x,p.y,p.size,p.size);
+      p.y += p.dy;
+      if(p.y>canvas.height) p.y=0;
+    });
+    requestAnimationFrame(update);
+  }
+  update();
+}
+</script>
+
+</body>
+</html>
