@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Be My Valentine ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comic+Neue:wght@700&family=Indie+Flower&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      text-align: center;
+      background-color: #ffe6f0;
+      overflow: hidden;
+      font-family: 'Comic Neue', cursive;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-family: 'Pacifico', cursive;
+      font-size: 42px;
+    }
+
+    #sticker {
+      width: 170px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #yes {
+      background-color: green;
+      width: 200px;
+      height: 80px;
+      font-size: 20px;
+    }
+
+    #no {
+      background-color: red;
+      width: 200px;
+      height: 80px;
+      font-size: 20px;
+      position: absolute;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<img id="sticker" src="https://media1.tenor.com/m/gVtCOBNLsasAAAAd/mua-kiss.gif.gif">
+<h1 id="title">Will you Be My Valentine ❤️️</h1>
+
+<button id="yes" class="btn">YES 💘</button>
+<button id="no" class="btn">NO 😭</button>
+
+<canvas id="confetti"></canvas>
+
+<script>
+let noCount = 0;
+
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const sticker = document.getElementById("sticker");
+const title = document.getElementById("title");
+
+let yesW = 200, yesH = 80;
+let noW = 200, noH = 80;
+
+function adjustText() {
+  noBtn.style.fontSize = Math.max(12, noW / 10) + "px";
+}
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - noW);
+  const y = Math.random() * (window.innerHeight - noH);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("click", () => {
+  noCount++;
+
+  // Resize buttons
+  yesW += 40;
+  yesH += 20;
+
+  noW -= 20;
+  noH -= 10;
+
+  noW = Math.max(noW, 60);
+  noH = Math.max(noH, 40);
+
+  yesBtn.style.width = yesW + "px";
+  yesBtn.style.height = yesH + "px";
+
+  noBtn.style.width = noW + "px";
+  noBtn.style.height = noH + "px";
+
+  adjustText();
+
+  switch(noCount) {
+    case 1:
+      noBtn.innerText = "Are you positive?";
+      sticker.src = "https://i.imgur.com/DvuHwkC.gif";
+      title.style.fontFamily = "Indie Flower";
+      break;
+
+    case 2:
+      noBtn.innerText = "Pookie pls 🥺";
+      sticker.src = "https://i.imgur.com/ZqEUjc5.jpeg";
+      break;
+
+    case 3:
+      noBtn.innerText = "I will be Sad.";
+	  sticker.src ="https://i.imgur.com/uBncDPy.gif";
+      break;
+
+    case 4:
+      noBtn.innerText = "Very sad!! 😤";
+      sticker.src = "https://i.imgur.com/6XFqQOU.gif";
+      title.style.color = "#d6336c";
+      break;
+
+    case 5:
+      noBtn.innerText = "Please?? 😭";
+      sticker.src = "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif";
+      break;
+
+    case 6:
+      noBtn.innerText = "STOP! Don’t… 💔";
+	  sticker.src = "https://i.imgur.com/L6hHuhK.jpeg";
+      break;
+
+    case 7:
+      noBtn.innerText = "Last chance!";
+      noBtn.addEventListener("mouseover", moveButton);
+	  sticker.src = "https://media.tenor.com/tOhnd3nQiisAAAAi/tkthao219-quby.gif";
+      break;
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <style>
+      body {
+        background: #ffe6f0;
+        overflow: hidden;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+      }
+
+      h1 {
+        margin-top: 100px;
+        font-size: 42px;
+        color: #ff4d88;
+        animation: glow 1.5s ease-in-out infinite alternate;
+      }
+
+      h2 {
+        font-size: 24px;
+        color: #ff66a3;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff66a3;
+        }
+        to {
+          text-shadow: 0 0 20px #ff3385, 0 0 30px #ff1a75;
+        }
+      }
+
+      .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 20px;
+        animation: floatUp 4s linear infinite;
+      }
+
+      @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-800px) scale(1.5); opacity: 0; }
+      }
+
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+    </style>
+
+    <h1>I knew you would say YES!! 😍</h1>
+    <h2>You are so Lucky to have me 🧸💕</h2>
+	<h4></h4>
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" style="width:230px; margin-top:20px;">
+    
+    <canvas id="confetti"></canvas>
+  `;
+
+  startConfetti();
+  createHearts();
+});
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }, 200);
+}
+
+/* Confetti */
+function startConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let pieces = [];
+
+  for (let i = 0; i < 250; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dy: Math.random() * 6 + 2,
+      size: Math.random() * 6 + 2
+    });
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    pieces.forEach(p => {
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+      p.y += p.dy;
+      if (p.y > canvas.height) p.y = 0;
+    });
+
+    requestAnimationFrame(update);
+  }
+
+  update();
+}
+</script>
+
+</body>
+</html>
